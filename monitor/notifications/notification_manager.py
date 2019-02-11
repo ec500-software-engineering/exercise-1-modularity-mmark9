@@ -1,4 +1,4 @@
-from common_types import MessageUrgency
+from monitor.common_types import MessageUrgency
 
 
 class NotificationManager(object):

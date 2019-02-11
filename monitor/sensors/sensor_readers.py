@@ -1,8 +1,8 @@
 import time
-import sensors
 import datetime
 from threading import Thread
-from common_types import BloodOxygenData, BloodPressureData, BloodPulseData
+from monitor.sensors import sensors
+from monitor.common_types import BloodOxygenData, BloodPressureData, BloodPulseData
 
 
 class SensorReader(Thread):

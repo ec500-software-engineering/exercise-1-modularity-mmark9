@@ -1,7 +1,7 @@
 import time
 import random
 import threading
-from common_types import Message, MessageUrgency
+from monitor.common_types import Message, MessageUrgency
 
 '''
 This class is responsible for updating its internal model and 

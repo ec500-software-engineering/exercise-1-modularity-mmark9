@@ -1,8 +1,8 @@
 import time
 import random
 import threading
-from common_types import SensorDataType
-from common_types import Message, MessageUrgency
+from monitor.common_types import SensorDataType, \
+    Message, MessageUrgency
 
 
 class RealTimeDataProcessor(threading.Thread):

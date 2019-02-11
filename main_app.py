@@ -1,12 +1,10 @@
-import display
-import sensor_readers
-import prediction_engine
-import notification_manager
-import notifications_sender
-import realtime_data_processor
+from monitor.sensors import sensor_readers
+from monitor import prediction_engine, realtime_data_processor, display
+from monitor.notifications import notification_manager
+from monitor.notifications import notifications_sender
 from multiprocessing import Queue
-from common_types import Contact
-from database import InMemorySimpleDatabase
+from monitor.common_types import Contact
+from monitor.database import InMemorySimpleDatabase
 
 
 def main(cmd_args):
