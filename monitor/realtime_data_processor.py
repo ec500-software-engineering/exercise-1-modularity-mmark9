@@ -30,24 +30,29 @@ class RealTimeDataProcessor(threading.Thread):
         '''
 
         while True:
-            incoming_data = self._in_queue.get(block=True)
-            if incoming_data.get_type() == SensorDataType.BLOOD_PRESSURE:
-                if not RealTimeDataProcessor.blood_pressure_is_normal(incoming_data):
-                    self._notification_man.send_message(
-                        Message(
-                            '!!!! PATIENT ALERT BLOOD PRESSURE ABNORMAL !!!!',
-                            MessageUrgency.HIGH_URGENCY
+            if self._in_queue.empty():
+                print(
+                    'Real-time Data processor: no data found in queue....'
+                )
+            else:
+                incoming_data = self._in_queue.get(block=True)
+                if incoming_data.get_type() == SensorDataType.BLOOD_PRESSURE:
+                    if not RealTimeDataProcessor.blood_pressure_is_normal(incoming_data):
+                        self._notification_man.send_message(
+                            Message(
+                                '!!!! PATIENT ALERT BLOOD PRESSURE ABNORMAL !!!!',
+                                MessageUrgency.HIGH_URGENCY
+                            )
                         )
-                    )
-            elif incoming_data.get_type() == SensorDataType.BLOOD_PULSE:
-                if not RealTimeDataProcessor.blood_pulse_is_normal(incoming_data):
-                    self._notification_man.send_message(
-                        Message(
-                            '!!!! PATIENT ALERT PULSE IS ABNORMAL !!!!',
-                            MessageUrgency.HIGH_URGENCY
+                elif incoming_data.get_type() == SensorDataType.BLOOD_PULSE:
+                    if not RealTimeDataProcessor.blood_pulse_is_normal(incoming_data):
+                        self._notification_man.send_message(
+                            Message(
+                                '!!!! PATIENT ALERT PULSE IS ABNORMAL !!!!',
+                                MessageUrgency.HIGH_URGENCY
+                            )
                         )
-                    )
-            # yield quantum/time slice for other ready threads
+                # yield quantum/time slice for other ready threads
             time.sleep(
                 random.randint(1, 3)
             )
